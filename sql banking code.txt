@@ -1,0 +1,87 @@
+create table branch
+(
+  branch_name varchar(20)NOT NULL primary key,
+  branch_city varchar(20),
+  assets number(10,2)
+  );
+create table account
+(
+acc_no number(8)primary key,
+branch_name references branch(branch_name),
+balance number(10,3)
+);
+
+create table customer
+(
+  cust_name varchar(20)primary key,
+  cust_street varchar(20),
+  cust_city varchar(20)
+);
+
+create table depositer
+(
+  cust_name references customer(cust_name),acc_no references account(acc_no)
+  ON DELETE CASCADE);
+
+create table loan
+(
+  loan_no number(8)primary key,
+  branch_name references branch(branch_name),
+  amount number(10,3)
+);
+
+create table borrower
+(
+  cust_name varchar(15) references customer(cust_name),
+  loan_no number(8) references loan(loan_no));
+ 
+ insert into branch values('main','surat','20000');
+ insert into branch values('sub1','vij','30000');
+ insert into branch values('sub2','him','50000');
+ insert into branch values('sub3','vizg','40000');
+ 
+select * from branch;
+
+ insert into account values('2240','main','56000');
+ insert into account values('2280','sub1','86000');
+ insert into account values('2290','sub2','36000');
+ insert into account values('2723','sub3','6000');
+
+select * from account;  
+
+
+ insert into customer values('deep','surat','hirabaug');
+ insert into customer values('meet','vadodra','ak road');
+ insert into customer values('vinit','amdabad','sarkhag road');
+ insert into customer values('marlin','haidrabad','navapura');
+ 
+select * from customer;
+
+ insert into depositer values('deep','2240');
+ insert into depositer values('meet','2280');
+ insert into depositer values('vinit','2290');
+ insert into depositer values('marlin','2723');
+ 
+select * from depositer;
+
+insert into loan values('2121','main','9099');
+insert into loan values('2122','sub1','6370');
+insert into loan values('2123','sub2','6054');
+insert into loan values('2124','sub3','7896');
+
+select * from loan;
+
+insert into borrower values('deep','9099');
+insert into borrower values('meet','6370');
+insert into borrower values('vinit','6054');
+insert into borrower values('marlin','7896');
+
+select * from borrower;
+
+
+  
+  
+  
+  
+  
+  
